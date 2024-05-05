@@ -1,7 +1,7 @@
 # HUNTER'S TAVERN
 Are you a Hunter seeking valuable, insider information? You've made it to the right place.
 
-<iframe src="https://giphy.com/embed/9vhUPMhyGcTRe" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/anime-gif-hunter-x-illumi-zoldyck-9vhUPMhyGcTRe">via GIPHY</a></p>
+![illumi](https://github.com/VanessaKasminoff/hunter-tavern/assets/147570668/67e9657b-5c6e-4d56-80ff-16a1a844b73d)
 
 Here you will find only the most reliable content for Hunters, updated and run by the Hunter Association.
 
