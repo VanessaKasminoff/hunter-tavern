@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 body {
   background-color: black;
   color: white;
 }
-
-
 
 #login-container {
   height: 100vh;
@@ -11,4 +11,33 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.hunter-logo {
+  height: 400px;
+  margin-bottom: 50px;
+  user-select: none;
+}
+
+.form-container {
+  width: 30%;
+}
+
+.form-label {
+  color: red;
+  font-family: 'Roboto Mono', sans-serif;
+  font-size: 1.3rem;
+  user-select: none;
+}
+
+.form-button {
+  margin-top: 10px;
+  margin-left: 50%;
+  transform: translate(-50%);
+  height: 45px;
+  width: 25%;
+  padding: 0;
+  font-family: 'Roboto Mono', sans-serif;
+  font-size: 1.6rem;
+  user-select: none;
 }
