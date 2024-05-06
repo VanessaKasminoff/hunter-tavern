@@ -19,6 +19,16 @@ body {
   user-select: none;
 }
 
+.blue-square {
+  height: 30px;
+  margin: 0 10px 5px 10px;
+  box-shadow: 2px 2px 25px blue;
+}
+
+.blue-square:hover {
+  box-shadow: 2px 2px 10px blue;
+}
+
 .form-container {
   width: 30%;
 }
@@ -39,5 +49,12 @@ body {
   padding: 0;
   font-family: 'Roboto Mono', sans-serif;
   font-size: 1.6rem;
+  background-color: blue;
+  border: none;
+  transition: ease 0.5s;
   user-select: none;
+}
+
+.form-button:hover {
+  background-color: rgb(49, 49, 255);
 }

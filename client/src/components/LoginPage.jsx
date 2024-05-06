@@ -2,16 +2,23 @@ import { useState } from "react"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import HunterLogo from '../assets/images/hunterxhunterlogotransparent.png'
+import BlueSquare from '../assets/images/bluesquare.svg'
 
 const LoginPage = () => {
     const [credentials, setCredentials] = useState({
         name: '',
         password: '',
         license: ''
-    })
+    });
+    const [validated, setValidated] = useState(false);
 
     async function handleSubmit(e) {
-        e.preventDefault()
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        setValidated(true);
     }
 
     console.log(credentials)
@@ -19,7 +26,12 @@ const LoginPage = () => {
     return (
         <div id="login-container">
                 <img className="hunter-logo" src={HunterLogo} alt="Hunter x Hunter Logo"/>
-                <Form onSubmit={handleSubmit} className="form-container">
+                <div>
+                    <span><img className="blue-square" src={BlueSquare} alt="Blue square"/></span>
+                    <span><img className="blue-square" src={BlueSquare} alt="Blue square"/></span>
+                    <span><img className="blue-square" src={BlueSquare} alt="Blue square"/></span>
+                </div>
+                <Form noValidate validated={validated} onSubmit={handleSubmit} className="form-container">
                     <Form.Group className="mb-3" controlId="name">
                         <Form.Label column="lg" className="form-label">Name</Form.Label>
                         <Form.Control 
@@ -29,6 +41,7 @@ const LoginPage = () => {
                             onChange={e => setCredentials({...credentials, name: e.target.value})}
                             required
                         />
+                        <Form.Control.Feedback type="invalid">Please enter your name.</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="password">
                         <Form.Label column="lg" className="form-label">Password</Form.Label>
@@ -39,6 +52,7 @@ const LoginPage = () => {
                             onChange={e => setCredentials({...credentials, password: e.target.value})}
                             required
                         />
+                        <Form.Control.Feedback type="invalid">Please enter your password.</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="license">
                         <Form.Label column="lg" className="form-label">Hunter License #</Form.Label>
@@ -49,6 +63,7 @@ const LoginPage = () => {
                             onChange={e => setCredentials({...credentials, license: e.target.value})}
                             required
                         />
+                        <Form.Control.Feedback type="invalid">Please enter your license #.</Form.Control.Feedback>
                     </Form.Group>
                     <Button as="input" type="submit" value="Login" className="form-button"/>
                 </Form>
