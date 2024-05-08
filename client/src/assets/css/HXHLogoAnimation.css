@@ -1,0 +1,271 @@
+/* common, optional */
+
+/* html {
+    background-color: black;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    opacity: 1;
+    animation: opacity0to1 1s;
+  }
+  
+  @keyframes opacity0to1 {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  } */
+  
+  
+  /* container for each example */
+  .primary-wrapper{
+    /* position may be changed to relative  but be mindful you'll have to adjust {top, left, transform: translate(x, y)} */
+    position: relative;
+    /* top and left are based on parent/container while transform: translate(x, y) is based on self*/
+    top: 90%;
+    left: 50%;
+    background-color: black;
+    /* outline: red 1px dashed; */
+    width: 820px;
+    height: 500px;
+  
+    /* cursor: pointer; */
+  }
+  /* draw example one a bit higher */
+  .example-one{
+    /* transform: translate(x, y) is based on self 
+    higher numbers mean greater distance from top AKA moving down .. therefore lower numbers means moving up*/
+    transform: translate(-50%, -101%);
+  }
+  
+  .example-two{
+    /* transform: translate(x, y) is based on self 
+    Y value here is 102% greater than example one (-101% vs 1%), that puts it 1.01 times itself lower than example one.
+    100% would move it perfectly below example one
+    102% moves it perfectly below but with 2% margin*/
+    transform: translate(-50%, 1%);
+  }
+  /* in example two, 
+  delay when going from  (left and right x)  to  (shmedium centered x)
+  to give time for diamond to fade out first
+  Fade out diamond, THEN unfold Xs*/
+  .primary-wrapper.example-two > .drop-shadow-wrapper > .shmedium-x{
+    transition-delay: 1s;
+  }
+  
+  /* in example two,
+  no delay when going from  (shmedium centered x)  to  (left and right x)
+  FYI the diamond has its own 1s delay in this situation.
+  see .visible-fade-after down in diamond section
+  So immediately unfold Xs and THEN fade in diamond
+  */
+  .primary-wrapper.example-two > .drop-shadow-wrapper > .left-x,
+  .primary-wrapper.example-two > .drop-shadow-wrapper > .right-x{
+    transition-delay: 0s;
+  }
+  
+  
+  /* you can't have box shadow on things that are clipped because clip path clips the shadow away 
+  the solution is to have a wrapper with filter:drop-shadow*/
+  .drop-shadow-wrapper{
+  filter: drop-shadow(0px -5px 1px rgba(255, 255, 255, 0.5));
+  }
+  
+  
+  /* X Section */
+  /* X Section */
+  /* X Section */
+  /* X Section */
+  /* X Section */
+  
+  /* base X properties */
+  .x{
+    /*Two example options for transition! Experiment!
+    Make sure the sliding (left, transform) are both at the same transition type/time to prevent weird behaviors*/
+  
+    /* Option 1: This one does the sliding (left, transform) separate from the shape change (clip-path) */
+    /* transition: 
+      left 1s ease-in, 
+      transform 1s ease-in, 
+      clip-path 3s ease-in; */
+  
+    /* Option 2: This one just sets everything to the same time/type */
+    transition: 1s ease-in;
+  
+    /* color of the x */
+    background-color: white;
+    /* to allow direct positioning in container */
+    position: absolute;
+    /* self explanatory */
+    width:  480px;
+    height: 500px;
+  }
+  
+  /* shmedium X, this is the X that starts in center */
+  .shmedium-x {
+    /* direct positioning in container, move left edge 50% over to center, then move 50% of self to left, resulting in center of X being in center of container */
+    left: 50%;
+    transform: translate(-50%, 0);
+    /* a tedious clip-path */
+    clip-path: polygon(
+      0 0, 41% 0, 41% 3%, 27% 3%, 
+      50% 43%, 73% 3%, 59% 3%, 59% 0, 100% 0, 97% 3%, 83% 3%, 
+      56% 50%, 83% 97%, 97% 97%, 100% 100%, 59% 100%, 59% 97%, 73% 97%, 
+      50% 57%, 27% 97%, 41% 97%, 41% 100%, 0 100%, 3% 97%, 17% 97%, 
+      44% 50%, 17% 3%, 3% 3%);
+  
+  }
+  
+  /* left x that is skinny from top left to bottom right */
+  .left-x{
+    /* direct pos. left edge to left of container */
+    /* left of container */
+    left: 0%;
+    /* left edge of self */
+    transform: translate(0, 0);
+    /* another tedious clip-path */
+    clip-path: polygon(
+      0 0, 41% 0, 41% 3%, 23.3% 3%, 
+      45% 42.5%, 70% 3%, 59% 3%, 59% 0, 97% 0, 97% 3%, 86% 3%, 
+      54% 54%, 80% 97%, 97% 97%, 97% 100%, 59% 100%, 59% 97%, 76% 97%, 
+      52% 58%, 30% 97%, 41% 97%, 41% 100%, 0 100%, 3% 97%, 14% 97%, 
+      43.5% 46%, 20% 3%, 3% 3%);
+  }
+  
+  /* same as right x but different position and clip-path */
+  .right-x-transform{
+    left: 100%;
+    transform: translate(-100%, 0);
+  
+    /* the comments below refer to the first pair directly undre each comment.. they are the corresponding inner center corners of the clip-path
+    you can delete or keep them it doesn't matter but you prob already know that */
+    clip-path: polygon(
+      0 0, 41% 0, 41% 3%, 30% 3%, 
+      /* corresponds to first point */ 
+      53% 42.5%, 76% 3%, 59% 3%, 59% 0, 100% 0, 97% 3%, 80% 3%, 
+      /*  corresponds to fourth point*/
+      55% 46%, 86% 97%, 97% 97%, 100% 100%, 59% 100%, 59% 97%, 70% 97%, 
+      /* corresponds to third point */
+      48% 58%, 24% 97%, 41% 97%, 41% 100%, 0 100%, 0 97%, 20% 97%, 
+      /* corresponds to second point */
+      46% 54%, 14% 3%, 0 3%);
+  }
+  
+  /* This is for example two, where instead of a separate clip path, we use flipping magic ;) FLIPPING MAGIC */
+  .flip-to-right{
+    left: 100%;
+    /* the flippin' magic is in the scaleX .. think you're shrinking the width until you start actually increasing it again*/
+    transform: translate(-100%, 0) scaleX(-1);
+  }
+  
+  /* center diamond section */
+  /* center diamond section */
+  /* center diamond section */
+  /* center diamond section */
+  /* center diamond section */
+  
+  .diamond{
+    /* pre animation attributes */
+  
+    /* place behind other elements which default to 0 */
+    z-index: -1;
+    /* center */
+    left: 50%;
+    transform: translate(-50%, 0);
+    position: absolute;
+    width: 320px;
+    height: 500px;
+    /* slightly darker */
+    /* background-color: rgba(197,32,56, 1); */
+    /* slightly brighter */
+    background-color: rgba(209,48,54, 1);
+    /* diamond path ez */
+    clip-path: polygon(50% 0, 100% 54%, 58% 100%, 42% 100%, 0 54%);
+  
+    /* for development, places diamond above and makes transparent to observe overlap*/
+    /* opacity: 0.5;
+    z-index: 10; */
+  }
+  /* unique to example two for unfolding,
+  fade diamond in after Xs finish unfolding */
+  .primary-wrapper.example-two > .diamond {
+    transition: all 1s 1s ease-in-out, opacity 1s ease-in-out; 
+    opacity: 0;
+  }
+  .primary-wrapper.example-two > .visible-fade-after{
+    opacity: 1;
+    /* fade in with a 1 second delay */
+    transition: opacity 1s 1s ease-in-out;
+  }
+  
+  .primary-wrapper.example-one > .diamond{
+    opacity: 1;
+    width: 40px;
+    height: 50px;
+    /* temporarily join the bottom two vertices */
+    clip-path: polygon(50% 0, 100% 54%, 50% 100%, 50% 100%, 0 54%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s ease-in
+  }
+  .primary-wrapper.example-one > .visible-by-expansion{
+    width: 320px;
+    height: 500px;
+    /* turn it back into what is technically a pentagon, splitting the bottom two vertices */
+    clip-path: polygon(50% 0, 100% 54%, 58% 100%, 42% 100%, 0 54%);
+    transition: 1s ease-in;
+  }
+  
+  
+  
+  
+  
+  /* A record of clip paths. May or may not be helpful. */
+  /* A record of clip paths. May or may not be helpful. */
+  /* A record of clip paths. May or may not be helpful. */
+  /* A record of clip paths. May or may not be helpful. */
+  /* A record of clip paths. May or may not be helpful. */
+  /* 
+  -symmetrical-
+  
+  thin x
+  clip-path: polygon(
+      0 0, 41% 0, 41% 3%, 24% 3%, 
+      50% 47.5%, 76% 3%, 59% 3%, 59% 0, 100% 0, 97% 3%, 80% 3%, 
+      53% 50%, 80% 97%, 97% 97%, 100% 100%, 59% 100%, 59% 97%, 76% 97%, 
+      50% 52.5%, 24% 97%, 41% 97%, 41% 100%, 0 100%, 3% 97%, 20% 97%, 
+      47% 50%, 20% 3%, 3% 3%);
+  
+  shmedium x
+  clip-path: polygon(
+      0 0, 41% 0, 41% 3%, 27% 3%, 
+      50% 44%, 73% 3%, 59% 3%, 59% 0, 100% 0, 97% 3%, 83% 3%, 
+      57% 50%, 83% 97%, 97% 97%, 100% 100%, 59% 100%, 59% 97%, 73% 97%, 
+      50% 56%, 27% 97%, 41% 97%, 41% 100%, 0 100%, 3% 97%, 17% 97%, 
+      43% 50%, 17% 3%, 3% 3%);
+  
+  -asymmetrical-
+  
+  left X (thin FROM top left DOWN TO bottom right) (fat FROM top right DOWN TO bottom left)
+  clip-path: polygon(
+      0 0, 41% 0, 41% 3%, 24% 3%, 
+      45% 42%, 70% 3%, 59% 3%, 59% 0, 97% 0, 97% 3%, 86% 3%, 
+      54% 54%, 80% 97%, 97% 97%, 97% 100%, 59% 100%, 59% 97%, 76% 97%, 
+      52% 58%, 30% 97%, 41% 97%, 41% 100%, 0 100%, 3% 97%, 14% 97%, 
+      43% 46%, 20% 3%, 3% 3%);
+  
+  right X (thin FROM top right DOWN TO bottom left) (fat FROM top left DOWN TO bottom right)
+  clip-path: polygon(
+      0 0, 41% 0, 41% 3%, 30% 3%, 
+      53% 41%, 76% 3%, 59% 3%, 59% 0, 100% 0, 97% 3%, 80% 3%, 
+      55% 44%, 86% 97%, 97% 97%, 100% 100%, 59% 100%, 59% 97%, 70% 97%, 
+      48% 58%, 24% 97%, 41% 97%, 41% 100%, 0 100%, 0 97%, 20% 97%, 
+      46% 54%, 14% 3%, 0 3%);
+  */

@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import HunterLogo from '../assets/images/hunterxhunterlogotransparent.png'
 import BlueSquare from '../assets/images/bluesquare.svg'
+import HXHLogoAnimation from "./HXHLogoAnimation"
 
 const LoginPage = () => {
     const [credentials, setCredentials] = useState({
@@ -23,9 +24,20 @@ const LoginPage = () => {
 
     console.log(credentials)
 
+    //LOGO ANIMATION
+    const [altered, setAltered] = useState(false)
+
+  // on render, or some other condition, trigger the animated state
+    useEffect(() => {
+        setTimeout(() => {
+         setAltered(true)
+        }, 1000);
+     }, [])
+
     return (
         <div id="login-container">
-                <img className="hunter-logo" src={HunterLogo} alt="Hunter x Hunter Logo"/>
+            <HXHLogoAnimation altered={altered} setAltered={setAltered} />
+                {/* <img className="hunter-logo" src={HunterLogo} alt="Hunter x Hunter Logo"/> */}
                 <div>
                     <span><img className="blue-square" src={BlueSquare} alt="Blue square"/></span>
                     <span><img className="blue-square" src={BlueSquare} alt="Blue square"/></span>
