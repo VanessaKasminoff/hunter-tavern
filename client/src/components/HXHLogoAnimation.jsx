@@ -15,3 +15,5 @@ const HXHLogoAnimation = ({altered, setAltered}) => {
 }
 
 export default HXHLogoAnimation
+
+// This awesome component was created by https://github.com/moefingers !!!
